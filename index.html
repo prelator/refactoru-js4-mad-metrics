@@ -703,7 +703,7 @@
 				    ) * 100;
 				}
 
-				
+				/*Determine max percentage of page scrolled to*/
 				var percentArray = [];
 				var currentScrollPercent = 0;
 				var scrollTimer = setInterval(function(){getCurrentScroll();}, 1000);
@@ -725,8 +725,20 @@
 					} return max;
 				};
 
+                    /*Determine total distance scrolled*/
+                    var totalDist = 0;
+                    var initPos = get_window_Yscroll();                   
+                    var scrollPosTimer = setInterval(function(){getPosition();}, 300);
+                    
+                    var getPosition = function(){
+                         var curPos = get_window_Yscroll();
+                         var dist = Math.abs(curPos - initPos);
+                         initPos = curPos;
+                         totalDist = totalDist + dist;
+                    };
 
-				var seconds = 0;
+				/*Determine time since page load*/
+                    var seconds = 0;
 				var timeElapsed = function() {
 					setInterval(function(){
 					seconds++;
@@ -735,13 +747,15 @@
 				};
 				timeElapsed();
 
+                    /*Function to be performed on click of signup button*/
 				var clicked = 0;
 				var signup = function() {
 					clicked = seconds;
 					alert('You are signed up!');
 				};
-
-        var metrics  = function() {alert("You have viewed " + Math.round(getMaxScroll()) + "% of the page. "+ "\nYou are currently " + Math.round(get_scroll_percentage()) + "% of the way down the page." + "\nTime spent on page: " + seconds + " seconds" +"\nTime before signup button clicked: " + clicked + " seconds");  
+                    
+          /*Master function to be peformed when metrics button clicked*/
+        var metrics  = function() {alert("You have viewed " + Math.round(getMaxScroll()) + "% of the page. "+ "\nYou are currently " + Math.round(get_scroll_percentage()) + "% of the way down the page." + "\nTotal distance scrolled: " + totalDist + " pixels" + "\nTime spent on page: " + seconds + " seconds" +"\nTime before signup button clicked: " + clicked + " seconds");  
 			};
   
         </script>
