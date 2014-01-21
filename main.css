@@ -81,6 +81,7 @@ h1  {
 h2 {
 	font-family: Helvetica, sans-serif;;
 	border-bottom: 1px solid lightblue;
+	color: gray;
 }
 
 .green-button {
